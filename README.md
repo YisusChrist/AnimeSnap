@@ -1,7 +1,6 @@
 <h1 align="center">⛩️ AnimeSnap 🍥</h1>
 
 <div align="center">
-  
   <a href="https://opensource.org/licenses/MIT">![License](https://img.shields.io/badge/License-MIT-yellow)</a>
   <a href="https://opensource.org/">![Language](https://img.shields.io/badge/Open-Source-blue)</a>
   <a href="https://github.com/rohankishore/AnimeSnap/releases">![Demo](https://img.shields.io/badge/Download-Now-indigo)</a>
@@ -20,11 +19,11 @@ And much more if you check `Include All Details`. It will also show multiple res
 
 ## 👒 Getting Started
 
-#### Requirements
+### Requirements
 - PyQt6 : `pip install pyqt6`
-- qdarktheme:  `pip install pyqtdarktheme`
+- qdarkstyle:  `pip install qdarkstyle`
 
-#### Using the App
+### Using the App
 
 ![image](https://github.com/rohankishore/AnimeSnap/assets/109947257/17b36284-4231-4747-b047-185e892b9252)
 
@@ -47,11 +46,13 @@ This project was made possible just because of [soruly](https://github.com/sorul
 
 ### Icon Credits
 
-| Icon Name    | Icon Use                                  | Icon Link                                       |
-|--------------|-------------------------------------------|-------------------------------------------------|
-| `folder.png` | Used to upload local image files          | https://www.flaticon.com/free-icons/folder      |
-| `dark.png`   | Icon to be shown if dark mode is enabled  | https://www.flaticon.com/free-icons/moon        |
-| `light.png`  | Icon to be shown if light mode is enabled | https://www.flaticon.com/free-icons/haw-weather |
+| Icon Name     | Icon Use                                  | Icon Link                                        |
+| ------------- | ----------------------------------------- | ------------------------------------------------ |
+| `folder.png`  | Used to upload local image files          | https://www.flaticon.com/free-icons/folder       |
+| `dark.png`    | Icon to be shown if dark mode is enabled  | https://www.flaticon.com/free-icons/moon         |
+| `light.png`   | Icon to be shown if light mode is enabled | https://www.flaticon.com/free-icons/haw-weather  |
+| `github.png`  | Used to to be shown for github link       | https://www.flaticon.com/free-icons/github       |
+| `twitter.png` | Used to to be shown for twitter link      | https://www.flaticon.com/free-icons/twitter-logo |
 
 <br>
 

@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "AnimeSnap"
+version = "0.1.0"
+description = "Unlock a world of anime information from a single scene screenshot including episode, timestamps, and much more!"
+license = "MIT"
+authors = ["Alejandro González Momblán <agelrenorenardo@gmail.com>"]
+readme = "README.md"
+repository = "https://github.com/yisuschrist/animesnap"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+filetype = "^1.2.0"
+platformdirs = "^3.11.0"    
+pyqt6 = "^6.5.2"
+qdarkstyle = "^3.1"
+requests = "^2.31.0"
+rich = "^13.6.0"
+validators = "^0.22.0"
+
+[tool.poetry.group.dev.dependencies]
+bandit = "^1.7.5"
+isort = "^5.12.0"
+monkeytype = "^23.3.0"
+mypy = "^1.6.0"
+pre-commit = "^3.5.0"
+pylint = "^3.0.1"
+
+[tool.pylint]
+disable = [
+   "W0622",  # Redefining built-in 'format' (redefined-builtin)
+   "C0103",  # Constant name doesn't conform to UPPER_CASE naming style (invalid-name)
+   "E0611",  # No name in module 'PyQt6' (no-name-in-module)
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
