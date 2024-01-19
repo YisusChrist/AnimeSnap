@@ -163,11 +163,13 @@ class App(QMainWindow):
         # Add the button layout to the provided layout
         layout.addLayout(button_layout)
 
-    def open_github(self: QMainWindow) -> None:
+    @staticmethod
+    def open_github() -> None:
         """Open the GitHub repository in the default browser."""
         webbrowser.open(GITHUB, new=1)
 
-    def open_twitter(self: QMainWindow) -> None:
+    @staticmethod
+    def open_twitter() -> None:
         """Open the Twitter profile in the default browser."""
         webbrowser.open(twitter_link, new=1)
 
