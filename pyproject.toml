@@ -32,6 +32,9 @@ disable = [
    "E0611",  # No name in module 'PyQt6' (no-name-in-module)
 ]
 
+[tool.poetry.scripts]
+AnimeSnap = "AnimeSnap.__main__:main"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
