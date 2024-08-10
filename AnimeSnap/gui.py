@@ -93,7 +93,7 @@ class App(QMainWindow):
         QMainWindow (QMainWindow): The main window of the application.
     """
 
-    def __init__(self: QMainWindow):
+    def __init__(self):
         """Constructor of the class"""
         super().__init__()
 
@@ -123,7 +123,7 @@ class App(QMainWindow):
         # Set the current page to the main menu
         self.resize_to_main_menu()
 
-    def social_media_links(self: QMainWindow, layout: QVBoxLayout) -> None:
+    def social_media_links(self, layout: QVBoxLayout) -> None:
         """
         Create the social media links.
 
@@ -173,7 +173,7 @@ class App(QMainWindow):
         """Open the Twitter profile in the default browser."""
         webbrowser.open(twitter_link, new=1)
 
-    def show_about(self: QMainWindow):
+    def show_about(self):
         """Show the about message."""
         about_message = (
             f"{NAME} - {DESC}\n\n"
@@ -184,7 +184,7 @@ class App(QMainWindow):
 
         QMessageBox.about(self, "About", about_message)
 
-    def show_help(self: QMainWindow) -> None:
+    def show_help(self) -> None:
         """Show the help message."""
         help_message = (
             "How to Use AnimeSnap:\n"
@@ -196,7 +196,7 @@ class App(QMainWindow):
         )
         QMessageBox.information(self, "Help", help_message)
 
-    def create_main_menu_widget(self: QMainWindow) -> QWidget:
+    def create_main_menu_widget(self) -> QWidget:
         """
         Create the main menu widget.
 
@@ -273,7 +273,7 @@ class App(QMainWindow):
         central_widget.setLayout(layout)
         return central_widget
 
-    def create_result_widget(self: QMainWindow) -> QWidget:
+    def create_result_widget(self) -> QWidget:
         """
         Create the result widget.
 
@@ -298,17 +298,17 @@ class App(QMainWindow):
         widget.setLayout(layout)
         return widget
 
-    def resize_to_main_menu(self: QMainWindow) -> None:
+    def resize_to_main_menu(self) -> None:
         """Resize the window to the main menu."""
         self.setWindowTitle("AnimeSnap")
         self.setGeometry(X, Y, 450, 150)
 
-    def resize_to_result_page(self: QMainWindow) -> None:
+    def resize_to_result_page(self) -> None:
         """Resize the window to the result page."""
         self.setWindowTitle("AnimeSnap - Results")
         self.setGeometry(X, Y, WIDTH, HEIGHT)
 
-    def switch_to_page(self: QMainWindow, page: QWidget) -> None:
+    def switch_to_page(self, page: QWidget) -> None:
         """Switch to the specified page.
 
         Args:
@@ -321,7 +321,7 @@ class App(QMainWindow):
         else:
             self.resize_to_main_menu()
 
-    def open_image(self: QMainWindow) -> None:
+    def open_image(self) -> None:
         """Open a file dialog to select an image file."""
         options = QFileDialog.Option.ReadOnly
         image_extensions = " ".join(get_image_extensions())
@@ -338,14 +338,14 @@ class App(QMainWindow):
         if file_path:
             self.img_source_entry.setText(file_path)
 
-    def return_to_menu(self: QMainWindow) -> None:
+    def return_to_menu(self) -> None:
         """Return to the main menu."""
         self.switch_to_page(self.main_menu_widget)
 
         self.img_source_entry.clear()
         self.anilist_entry.clear()
 
-    def on_click_theme_icon(self: QMainWindow) -> None:
+    def on_click_theme_icon(self) -> None:
         """Switch the theme of the application."""
         # We set the icon to the opposite of the current theme
         self.themes_button.setIcon(QIcon(f"{ICONS_PATH}/{self.ctheme}.png"))
@@ -353,7 +353,7 @@ class App(QMainWindow):
         palette = LightPalette if self.ctheme == "light" else None
         self.setStyleSheet(load_stylesheet(qt_api="pyqt6", palette=palette))
 
-    def switch_theme_name(self: QMainWindow) -> str:
+    def switch_theme_name(self) -> str:
         """
         Switch the theme name.
 
@@ -362,7 +362,7 @@ class App(QMainWindow):
         """
         return "light" if self.ctheme == "dark" else "dark"
 
-    def on_click_search(self: QMainWindow) -> None:
+    def on_click_search(self) -> None:
         """Conduct an anime search."""
         anilist_id = None
         if self.anilist_entry.text():
@@ -386,7 +386,7 @@ class App(QMainWindow):
             json_to_tabular(data=self.search_result, include_all_details=iad_status)
         )
 
-    def write_to_json(self: QMainWindow) -> None:
+    def write_to_json(self) -> None:
         """Write the JSON result to a file."""
         # Open a file dialog to select a file to write to
         dialog = QFileDialog(self)
@@ -408,7 +408,7 @@ class App(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
 
-    def run(self: QMainWindow):
+    def run(self):
         """Run the application."""
         self.show()
         self.raise_()
