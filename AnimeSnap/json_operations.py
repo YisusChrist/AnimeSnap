@@ -17,20 +17,22 @@ def format_entry(entry: dict, include_all_details: bool) -> str:
     """
     formatted_data = ""
 
-    items = entry.items()
+    items: dict = {k: v for k, v in entry.items()}
     if not include_all_details:
-        items = filter(
-            lambda item: item[0]
-            not in [
-                "anilist",
-                "video",
-                "image",
-            ],
-            items,
+        items = dict(
+            filter(
+                lambda item: item[0]
+                not in [
+                    "anilist",
+                    "video",
+                    "image",
+                ],
+                entry.items(),
+            )
         )
 
     for key, value in items:
-        if key == "anilist" and isinstance(entry[key]) is dict:
+        if key == "anilist" and isinstance(entry[key], dict):
             for k, v in entry[key].items():
                 formatted_data += f"{k.capitalize()}: {v}\n"
         elif key == "similarity":

@@ -1,18 +1,25 @@
 """Constants for the project."""
+
 from pathlib import Path
 
 from platformdirs import user_config_dir, user_log_dir
 
-from . import PACKAGE, __desc__, __version__
+try:
+    from importlib import metadata
+except ImportError:  # for Python < 3.8
+    import importlib_metadata as metadata  # type: ignore
 
-NAME = PACKAGE  # Path(__file__).name.split(".")[0]
-CONFIG_PATH = user_config_dir(appname=NAME, ensure_exists=True)
-CONFIG_FILE = Path(CONFIG_PATH).resolve() / f"{NAME}.ini"
-LOG_PATH = user_log_dir(appname=NAME, ensure_exists=True)
-LOG_FILE = Path(LOG_PATH).resolve() / f"{NAME}.log"
-ICONS_PATH = Path(__file__).parent.parent.resolve() / "icons"
-VERSION = __version__
-DESC = __desc__
+__version__: str = metadata.version(__package__ or __name__)
+__desc__: str = metadata.metadata(__package__ or __name__)["Summary"]
+PACKAGE: str = metadata.metadata(__package__ or __name__)["Name"]
+GITHUB: str = metadata.metadata(__package__ or __name__)["Home-page"]
+AUTHOR: str = metadata.metadata(__package__ or __name__)["Author"]
+
+CONFIG_PATH: str = user_config_dir(appname=PACKAGE, ensure_exists=True)
+CONFIG_FILE: Path = Path(CONFIG_PATH).resolve() / f"{PACKAGE}.ini"
+LOG_PATH: str = user_log_dir(appname=PACKAGE, ensure_exists=True)
+LOG_FILE: Path = Path(LOG_PATH).resolve() / f"{PACKAGE}.log"
+ICONS_PATH: Path = Path(__file__).parent.parent.resolve() / "icons"
 
 X = 100
 Y = 100

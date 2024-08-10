@@ -1,4 +1,5 @@
 """Main Python file containing the UI and functions"""
+
 import cProfile
 import sys
 
@@ -6,11 +7,11 @@ from PyQt6.QtWidgets import QApplication
 from rich import print
 from rich.traceback import install
 
-from .consts import DEBUG, PROFILE
-from .gui import App
+from AnimeSnap.consts import DEBUG, PROFILE
+from AnimeSnap.gui import App
 
 
-def main():
+def main() -> None:
     """Main function"""
     # Enable rich error formatting in debug mode
     install(show_locals=DEBUG)

@@ -1,33 +1,24 @@
 """Graphical User Interface for the project."""
+
 import importlib
 import inspect
 import webbrowser
 
 from PyQt6.QtCore import QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import (
-    QCheckBox,
-    QFileDialog,
-    QHBoxLayout,
-    QLabel,
-    QLineEdit,
-    QMainWindow,
-    QMessageBox,
-    QPushButton,
-    QSizePolicy,
-    QSpacerItem,
-    QStackedWidget,
-    QTextEdit,
-    QVBoxLayout,
-    QWidget,
-)
-from qdarkstyle import load_stylesheet
-from qdarkstyle.light.palette import LightPalette
+from PyQt6.QtWidgets import (QCheckBox, QFileDialog, QHBoxLayout, QLabel,
+                             QLineEdit, QMainWindow, QMessageBox, QPushButton,
+                             QSizePolicy, QSpacerItem, QStackedWidget,
+                             QTextEdit, QVBoxLayout, QWidget)
+from qdarkstyle import load_stylesheet  # type: ignore
+from qdarkstyle.light.palette import LightPalette  # type: ignore
 
-from . import AUTHOR, GITHUB
-from .consts import DESC, HEIGHT, ICON_SIZE, ICONS_PATH, NAME, VERSION, WIDTH, X, Y
-from .json_operations import json_to_tabular, save_to_json
-from .search import search_anime
+from AnimeSnap.consts import (AUTHOR, GITHUB, HEIGHT, ICON_SIZE, ICONS_PATH,
+                              PACKAGE, WIDTH, X, Y)
+from AnimeSnap.consts import __desc__ as DESC
+from AnimeSnap.consts import __version__ as VERSION
+from AnimeSnap.json_operations import json_to_tabular, save_to_json
+from AnimeSnap.search import search_anime
 
 twitter_link = "https://twitter.com/Yisus_Christ_98"
 
@@ -98,7 +89,7 @@ class App(QMainWindow):
         super().__init__()
 
         # Set the window icon
-        self.setWindowIcon(QIcon(f"{ICONS_PATH}/{NAME}.ico"))
+        self.setWindowIcon(QIcon(f"{ICONS_PATH}/{PACKAGE}.ico"))
 
         # Apply the dark theme stylesheet
         self.setStyleSheet(load_stylesheet(qt_api="pyqt6"))
@@ -176,7 +167,7 @@ class App(QMainWindow):
     def show_about(self):
         """Show the about message."""
         about_message = (
-            f"{NAME} - {DESC}\n\n"
+            f"{PACKAGE} - {DESC}\n\n"
             f"Version: {VERSION}\n"
             f"Author: {AUTHOR}\n"
             "Website: https://www.animesnapapp.com"

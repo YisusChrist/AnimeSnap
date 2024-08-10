@@ -1,15 +1,14 @@
 """conduct anime search"""
 
-
 import urllib
 
-import requests
-from validators import url as validate_url
+import requests  # type: ignore
+from validators import url as validate_url  # type: ignore
 
-from .consts import API_URL, MAX_TIMEOUT
+from AnimeSnap.consts import API_URL, MAX_TIMEOUT
 
 
-def search_anime(img_source: str, anilist_id: int = None) -> dict:
+def search_anime(img_source: str, anilist_id: int | None) -> dict:
     """
     Conduct an anime search.
 
