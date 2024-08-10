@@ -10,7 +10,7 @@ repository = "https://github.com/yisuschrist/animesnap"
 [tool.poetry.dependencies]
 python = "^3.11"
 filetype = "^1.2.0"
-platformdirs = "^3.11.0"    
+platformdirs = "^3.11.0"
 pyqt6 = "^6.5.2"
 qdarkstyle = "^3.1"
 requests = "^2.31.0"
