@@ -1,3 +1,9 @@
+<div align="center">
+
+![icon](https://github.com/user-attachments/assets/e7244321-0452-4a9d-b24d-1b70eedb16e7)
+
+</div>
+
 <h1 align="center">⛩️ AnimeSnap 🍥</h1>
 
 <div align="center">
@@ -30,7 +36,7 @@ And much more if you check `Include All Details`. It will also show multiple res
 
 ### Using the App
 
-![image](https://github.com/rohankishore/AnimeSnap/assets/109947257/17b36284-4231-4747-b047-185e892b9252)
+![image](https://github.com/user-attachments/assets/fc462b43-856f-410c-b998-f6841e2fd7df)
 
 You can either use an image link or upload an image from your PC. With v2.0, there are 2 new checkboxes. Removing black bars will help to increase the accuracy of the overall results if there are any black borders in your image, though the processing time may slightly increase. By checking `Include All Details`, you can get all the info that you get by uploading to JSON.
 
