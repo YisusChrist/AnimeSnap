@@ -17,6 +17,7 @@ qdarkstyle = "^3.1"
 requests = "^2.31.0"
 rich = "^13.6.0"
 validators = "^0.22.0"
+pyqt6-fluent-widgets = {extras = ["full"], version = "^1.6.2"}
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.9"
