@@ -224,13 +224,13 @@ files = [
 
 [[package]]
 name = "identify"
-version = "2.6.3"
+version = "2.6.4"
 description = "File identification library for Python"
 optional = false
 python-versions = ">=3.9"
 files = [
-    {file = "identify-2.6.3-py2.py3-none-any.whl", hash = "sha256:9edba65473324c2ea9684b1f944fe3191db3345e50b6d04571d10ed164f8d7bd"},
-    {file = "identify-2.6.3.tar.gz", hash = "sha256:62f5dae9b5fef52c84cc188514e9ea4f3f636b1d8799ab5ebc475471f9e47a02"},
+    {file = "identify-2.6.4-py2.py3-none-any.whl", hash = "sha256:993b0f01b97e0568c179bb9196391ff391bfb88a99099dbf5ce392b68f42d0af"},
+    {file = "identify-2.6.4.tar.gz", hash = "sha256:285a7d27e397652e8cafe537a6cc97dd470a970f48fb2e9d979aa38eae5513ac"},
 ]
 
 [package.extras]
@@ -562,6 +562,7 @@ optional = false
 python-versions = ">=3.9"
 files = [
     {file = "PyQt6-6.8.0-cp39-abi3-macosx_10_14_universal2.whl", hash = "sha256:8c5c05f5fdff31a5887dbc29b27615b09df467631238d7b449283809ffca6228"},
+    {file = "PyQt6-6.8.0-cp39-abi3-manylinux_2_28_x86_64.whl", hash = "sha256:3a4354816f11e812b727206a9ea6e79ff3774f1bb7228ad4b9318442d2c64ff9"},
     {file = "PyQt6-6.8.0-cp39-abi3-manylinux_2_35_x86_64.whl", hash = "sha256:452bae5840077bf0f146c798d7777f70d7bdd0c7dcfa9ee7a415c1daf2d10038"},
     {file = "PyQt6-6.8.0-cp39-abi3-manylinux_2_39_aarch64.whl", hash = "sha256:cf7123caea14e7ecf10bd12cae48e8d9970ef7caf627bc7d7988b0baa209adb3"},
     {file = "PyQt6-6.8.0-cp39-abi3-win_amd64.whl", hash = "sha256:a9913d479f1ffee804bf7f232079baea4fb4b221a8f4890117588917a54ea30d"},
