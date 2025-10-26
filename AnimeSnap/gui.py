@@ -1,41 +1,19 @@
 """Graphical User Interface for the project."""
 
-import importlib
 import inspect
 import webbrowser
 
 from PyQt6.QtCore import QSize
 from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import (
-    QCheckBox,
-    QFileDialog,
-    QHBoxLayout,
-    QLabel,
-    QLineEdit,
-    QMainWindow,
-    QMessageBox,
-    QPushButton,
-    QSizePolicy,
-    QSpacerItem,
-    QStackedWidget,
-    QTextEdit,
-    QVBoxLayout,
-    QWidget,
-)
+from PyQt6.QtWidgets import (QCheckBox, QFileDialog, QHBoxLayout, QLabel,
+                             QLineEdit, QMainWindow, QMessageBox, QPushButton,
+                             QSizePolicy, QSpacerItem, QStackedWidget,
+                             QTextEdit, QVBoxLayout, QWidget)
 from qdarkstyle import load_stylesheet  # type: ignore
 from qdarkstyle.light.palette import LightPalette  # type: ignore
 
-from AnimeSnap.consts import (
-    AUTHOR,
-    GITHUB,
-    HEIGHT,
-    ICON_SIZE,
-    ICONS_PATH,
-    PACKAGE,
-    WIDTH,
-    X,
-    Y,
-)
+from AnimeSnap.consts import (AUTHOR, GITHUB, HEIGHT, ICON_SIZE, ICONS_PATH,
+                              PACKAGE, WIDTH, X, Y)
 from AnimeSnap.consts import __desc__ as DESC
 from AnimeSnap.consts import __version__ as VERSION
 from AnimeSnap.json_operations import json_to_tabular, save_to_json
@@ -52,14 +30,11 @@ def get_image_extensions() -> list:
         list: A list of image extensions.
     """
     # Specify the name of the module you want to inspect
-    module_name = "filetype.types.image"
-
-    # Import the module dynamically
-    module = importlib.import_module(module_name)
+    from filetype.types import image
 
     # Get a list of class names defined in the module
     class_names = [
-        name for name, obj in inspect.getmembers(module) if inspect.isclass(obj)
+        name for name, obj in inspect.getmembers(image) if inspect.isclass(obj)
     ]
 
     # Extract the different classes names from the Image class
