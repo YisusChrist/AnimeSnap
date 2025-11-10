@@ -1,21 +1,31 @@
-[tool.poetry]
+[project]
 name = "AnimeSnap"
 version = "0.1.0"
 description = "Unlock a world of anime information from a single scene screenshot including episode, timestamps, and much more!"
 license = "MIT"
-authors = ["Alejandro González Momblán <agelrenorenardo@gmail.com>"]
+authors = [
+  { name = "Alejandro González Momblán", email = "agelrenorenardo@gmail.com" },
+]
 readme = "README.md"
-repository = "https://github.com/yisuschrist/animesnap"
+requires-python = ">=3.11,<4.0"
+dependencies = [
+  "core-helpers>=1.3.1",
+  "filetype>=1.2.0",
+  "qdarkstyle>=3.1",
+  "requests>=2.31.0",
+  "rich>=13.6.0",
+  "validators>=0.22.0",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-core-helpers = "^1.3.1"
-filetype = "^1.2.0"
-pyqt6 = "^6.5.2"
-qdarkstyle = "^3.1"
-requests = "^2.31.0"
-rich = "^13.6.0"
-validators = "^0.22.0"
+[project.urls]
+repository = "https://github.com/YisusChrist/AnimeSnap"
+
+[project.scripts]
+AnimeSnap = "AnimeSnap.__main__:main"
+
+[project.optional-dependencies]
+qt5 = ["pyqt5", "PyQt5-Qt5==5.15.2"]
+qt6 = ["pyqt6"]
 
 [tool.poetry.group.dev.dependencies]
 bandit = "^1.7.9"
@@ -27,13 +37,10 @@ pylint = "^3.0.1"
 
 [tool.pylint]
 disable = [
-   "W0622",  # Redefining built-in 'format' (redefined-builtin)
-   "C0103",  # Constant name doesn't conform to UPPER_CASE naming style (invalid-name)
-   "E0611",  # No name in module 'PyQt6' (no-name-in-module)
+  "W0622", # Redefining built-in 'format' (redefined-builtin)
+  "C0103", # Constant name doesn't conform to UPPER_CASE naming style (invalid-name)
+  "E0611", # No name in module 'PyQt6' (no-name-in-module)
 ]
-
-[tool.poetry.scripts]
-AnimeSnap = "AnimeSnap.__main__:main"
 
 [build-system]
 requires = ["poetry-core"]
