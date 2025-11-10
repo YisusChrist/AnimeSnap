@@ -3,11 +3,10 @@
 import sys
 from argparse import Namespace
 
-from PyQt6.QtWidgets import QApplication
 from rich.traceback import install
 
 from AnimeSnap.cli import get_parsed_args
-from AnimeSnap.gui import App
+from AnimeSnap.gui import QApplication, Window
 
 
 def main() -> None:
@@ -15,9 +14,14 @@ def main() -> None:
     args: Namespace = get_parsed_args()
     install(show_locals=args.debug)
 
-    app = QApplication(sys.argv)
-    App().run()
-    sys.exit(app.exec())
+    App = QApplication(sys.argv)
+    if args.debug:
+        print("Debug mode is ON")
+        # Message displayed about the Qt
+        App.aboutQt()
+
+    Window().run()
+    sys.exit(App.exec())
 
 
 if __name__ == "__main__":
