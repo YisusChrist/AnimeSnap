@@ -3,14 +3,53 @@
 import inspect
 import webbrowser
 
-from PyQt6.QtCore import QSize
-from PyQt6.QtGui import QIcon
-from PyQt6.QtWidgets import (QCheckBox, QFileDialog, QHBoxLayout, QLabel,
-                             QLineEdit, QMainWindow, QMessageBox, QPushButton,
-                             QSizePolicy, QSpacerItem, QStackedWidget,
-                             QTextEdit, QVBoxLayout, QWidget)
+# --- PyQt Compatibility Layer -------------------------------------------------
+try:
+    from PyQt6.QtWidgets import QApplication
+    from PyQt6.QtCore import QSize
+    from PyQt6.QtGui import QIcon
+    from PyQt6.QtWidgets import (QCheckBox, QFileDialog, QHBoxLayout, QLabel,
+                                 QLineEdit, QMainWindow, QMessageBox,
+                                 QPushButton, QSizePolicy, QSpacerItem,
+                                 QStackedWidget, QTextEdit, QVBoxLayout,
+                                 QWidget)
+
+    QT_API = 6
+except ImportError:
+    try:
+        from PyQt5.QtWidgets import QApplication
+        from PyQt5.QtCore import QSize
+        from PyQt5.QtGui import QIcon
+        from PyQt5.QtWidgets import (QCheckBox, QFileDialog, QHBoxLayout,
+                                     QLabel, QLineEdit, QMainWindow,
+                                     QMessageBox, QPushButton, QSizePolicy,
+                                     QSpacerItem, QStackedWidget, QTextEdit,
+                                     QVBoxLayout, QWidget)
+
+        QT_API = 5
+    except ImportError:
+        try:
+            from PyQt4.QtGui import QApplication
+            from PyQt4.QtCore import QSize
+            from PyQt4.QtGui import (QCheckBox, QFileDialog, QHBoxLayout, QIcon,
+                                    QLabel, QLineEdit, QMainWindow, QMessageBox,
+                                    QPushButton, QSizePolicy, QSpacerItem,
+                                    QStackedWidget, QTextEdit, QVBoxLayout,
+                                    QWidget)
+
+            QT_API = 4
+        except ImportError:
+            raise ImportError(
+                "No PyQt bindings could be found. Please install PyQt5 or PyQt6:"
+                "\n- For PyQt5: pip install AnimeSnap[qt5]"
+                "\n- For PyQt6: pip install AnimeSnap[qt6]"
+            )
+# ------------------------------------------------------------------------------
+
+QApplication = QApplication
+
+
 from qdarkstyle import load_stylesheet  # type: ignore
-from qdarkstyle.light.palette import LightPalette  # type: ignore
 
 from AnimeSnap.consts import (AUTHOR, GITHUB, HEIGHT, ICON_SIZE, ICONS_PATH,
                               PACKAGE, WIDTH, X, Y)
@@ -22,7 +61,7 @@ from AnimeSnap.search import search_anime
 twitter_link = "https://twitter.com/Yisus_Christ_98"
 
 
-def get_image_extensions() -> list:
+def get_image_extensions() -> list[str]:
     """
     Get a list of image extensions from the filetype module.
 
@@ -30,7 +69,7 @@ def get_image_extensions() -> list:
         list: A list of image extensions.
     """
     # Specify the name of the module you want to inspect
-    from filetype.types import image
+    from filetype.types import image  # type: ignore
 
     # Get a list of class names defined in the module
     class_names = [
@@ -41,7 +80,47 @@ def get_image_extensions() -> list:
     return ["*" + c.lower() for c in class_names]
 
 
-class App(QMainWindow):
+def get_open_file_name(
+    parent: QWidget,
+    title: str,
+    directory: str,
+    file_filter: str,
+    options: QFileDialog.Option | None = None,
+) -> tuple[str, str]:
+    """Cross-version QFileDialog.getOpenFileName"""
+    if QT_API >= 5:
+        file_path = QFileDialog.getOpenFileName(
+            parent=parent,
+            caption=title,
+            directory=directory,
+            filter=file_filter,
+            options=options or QFileDialog.Option.ReadOnly,
+        )
+        return file_path
+    else:  # PyQt4
+        return QFileDialog.getOpenFileName(parent, title, directory, file_filter)
+
+
+def get_save_file_name(
+    parent: QWidget,
+    title: str,
+    directory: str,
+    file_filter: str,
+):
+    """Cross-version QFileDialog.getSaveFileName"""
+    if QT_API >= 5:
+        file_path, _ = QFileDialog.getSaveFileName(
+            parent=parent,
+            caption=title,
+            directory=directory,
+            filter=file_filter,
+        )
+        return file_path, _
+    else:  # PyQt4
+        return QFileDialog.getSaveFileName(parent, title, directory, file_filter)
+
+
+class Window(QMainWindow):
     """
     Graphical User Interface for the AnimeSnap project.
 
@@ -80,7 +159,7 @@ class App(QMainWindow):
         QMainWindow (QMainWindow): The main window of the application.
     """
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Constructor of the class"""
         super().__init__()
 
@@ -88,7 +167,8 @@ class App(QMainWindow):
         self.setWindowIcon(QIcon(f"{ICONS_PATH}/{PACKAGE}.ico"))
 
         # Apply the dark theme stylesheet
-        self.setStyleSheet(load_stylesheet(qt_api="pyqt6"))
+        qt_api_name: str = f"pyqt{QT_API}"
+        self.setStyleSheet(load_stylesheet(qt_api=qt_api_name))
 
         self.ctheme = "dark"
         self.search_result = None
@@ -160,7 +240,7 @@ class App(QMainWindow):
         """Open the Twitter profile in the default browser."""
         webbrowser.open(twitter_link, new=1)
 
-    def show_about(self):
+    def show_about(self) -> None:
         """Show the about message."""
         about_message = (
             f"{PACKAGE} - {DESC}\n\n"
@@ -310,18 +390,12 @@ class App(QMainWindow):
 
     def open_image(self) -> None:
         """Open a file dialog to select an image file."""
-        options = QFileDialog.Option.ReadOnly
-        image_extensions = " ".join(get_image_extensions())
-        filters = f"Images ({image_extensions})"
-
-        file_path, _ = QFileDialog.getOpenFileName(
+        file_path, _ = get_open_file_name(
             self,
-            caption="Open Image to Search",
-            directory="",
-            filter=filters,
-            options=options,
+            "Open Image to Search",
+            "",
+            f"Images ({' '.join(get_image_extensions())})",
         )
-
         if file_path:
             self.img_source_entry.setText(file_path)
 
@@ -337,8 +411,15 @@ class App(QMainWindow):
         # We set the icon to the opposite of the current theme
         self.themes_button.setIcon(QIcon(f"{ICONS_PATH}/{self.ctheme}.png"))
         self.ctheme = self.switch_theme_name()
-        palette = LightPalette if self.ctheme == "light" else None
-        self.setStyleSheet(load_stylesheet(qt_api="pyqt6", palette=palette))
+
+        try:
+            from qdarkstyle.light.palette import LightPalette
+        except Exception:
+            LightPalette = None
+
+        palette = LightPalette if (self.ctheme == "light" and LightPalette) else None
+        qt_api_name: str = f"pyqt{QT_API}"
+        self.setStyleSheet(load_stylesheet(qt_api=qt_api_name, palette=palette))
 
     def switch_theme_name(self) -> str:
         """
@@ -375,15 +456,9 @@ class App(QMainWindow):
 
     def write_to_json(self) -> None:
         """Write the JSON result to a file."""
-        # Open a file dialog to select a file to write to
-        dialog = QFileDialog(self)
-        file_path, _ = dialog.getSaveFileName(
-            self,
-            "Save JSON File",
-            "",
-            "JSON Files (*.json);;All Files (*)",
+        file_path, _ = get_save_file_name(
+            self, "Save JSON File", "", "JSON Files (*.json);;All Files (*)"
         )
-
         if not file_path:
             return
 
