@@ -1,9 +1,13 @@
 """Main Python file containing the UI and functions"""
 
 import sys
-from argparse import Namespace
 
-from rich.traceback import install
+try:
+    from rich.traceback import install
+except ImportError:
+    def install(*args, **kwargs) -> None:
+        """Dummy install function if rich is not available."""
+        pass
 
 from AnimeSnap.cli import get_parsed_args
 from AnimeSnap.gui import QApplication, Window
@@ -11,7 +15,7 @@ from AnimeSnap.gui import QApplication, Window
 
 def main() -> None:
     """Main function"""
-    args: Namespace = get_parsed_args()
+    args = get_parsed_args()
     install(show_locals=args.debug)
 
     App = QApplication(sys.argv)
