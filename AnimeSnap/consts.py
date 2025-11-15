@@ -1,28 +1,43 @@
 """Constants for the project."""
 
 from pathlib import Path
+import sys
 
-from core_helpers.xdg_paths import PathType, get_user_path
+if sys.version_info > (3, 5):
+    from core_helpers.xdg_paths import PathType, get_user_path
 
-try:
-    from importlib import metadata
-except ImportError:  # for Python < 3.8
-    import importlib_metadata as metadata  # type: ignore
+    try:
+        from importlib import metadata
+    except ImportError:  # for Python < 3.8
+        import importlib_metadata as metadata  # type: ignore
 
-metadata_info = metadata.metadata(__package__ or __name__)
-__version__ = metadata.version(__package__ or __name__)
-__desc__ = metadata_info["Summary"]
-PACKAGE = metadata_info["Name"]
-GITHUB = (
-    metadata_info["Home-page"] or metadata_info["Project-URL"].split(",")[1].strip()
-)
-AUTHOR = metadata_info["Author"]
+    metadata_info = metadata.metadata(__package__ or __name__)
+    __version__ = metadata.version(__package__ or __name__)
+    __desc__ = metadata_info["Summary"]
+    PACKAGE = metadata_info["Name"]
+    GITHUB = (
+        metadata_info["Home-page"] or metadata_info["Project-URL"].split(",")[1].strip()
+    )
+    AUTHOR = metadata_info["Author"]
 
-CONFIG_PATH: Path = get_user_path(PACKAGE, PathType.CONFIG)
-CONFIG_FILE: Path = CONFIG_PATH / f"{PACKAGE}.ini"
-LOG_PATH: Path = get_user_path(PACKAGE, PathType.LOG)
-LOG_FILE: Path = LOG_PATH / f"{PACKAGE}.log"
-ICONS_PATH: Path = Path(__file__).parent.parent.resolve() / "icons"
+    CONFIG_PATH = "."
+    CONFIG_FILE = CONFIG_PATH + "/" + PACKAGE + ".ini"
+    LOG_PATH = "."
+    LOG_FILE = LOG_PATH + "/" + PACKAGE + ".log"
+    ICONS_PATH = Path(__file__).parent.parent.resolve() / "icons"
+else:
+    __version__ = "0.1.0"
+    __desc__ = "Unlock a world of anime information from a single scene screenshot including episode, timestamps, and much more!"
+    PACKAGE = "AnimeSnap"
+    GITHUB = "https://github.com/YisusChrist/AnimeSnap"
+    AUTHOR = "Alejandro González Momblán"
+
+    CONFIG_PATH = "."
+    CONFIG_FILE = CONFIG_PATH + "/" + PACKAGE + ".ini"
+    LOG_PATH = "."
+    LOG_FILE = LOG_PATH + "/" + PACKAGE + ".log"
+    ICONS_PATH = Path(__file__).parent.parent.resolve() / "icons"
+
 
 X = 100
 Y = 100
@@ -31,6 +46,7 @@ HEIGHT = 800
 ICON_SIZE = 23
 
 API_URL = "https://api.trace.moe/search"
+TWITTER_LINK = "https://twitter.com/Yisus_Christ_98"
 MAX_TIMEOUT = 10
 
 EXIT_SUCCESS = 0

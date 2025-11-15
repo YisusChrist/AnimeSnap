@@ -8,7 +8,7 @@ from validators import url as validate_url  # type: ignore
 from AnimeSnap.consts import API_URL, MAX_TIMEOUT
 
 
-def search_anime(img_source: str, anilist_id: int | None) -> dict:
+def search_anime(img_source: str, anilist_id) -> dict:
     """
     Conduct an anime search.
 
@@ -25,9 +25,9 @@ def search_anime(img_source: str, anilist_id: int | None) -> dict:
     """
     if validate_url(img_source):
         # We know it is a URL
-        url = API_URL + f"?url={urllib.parse.quote_plus(img_source)}"
+        url = API_URL + "?url=" + urllib.parse.quote_plus(img_source)
         if anilist_id:
-            url += f"&anilistInfo={anilist_id}"
+            url += "&anilistInfo={anilist_id}".format(anilist_id=anilist_id)
         response = requests.get(url, timeout=MAX_TIMEOUT)
     else:
         # We know it is a file path

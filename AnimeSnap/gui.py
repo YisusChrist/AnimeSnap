@@ -1,46 +1,43 @@
 """Graphical User Interface for the project."""
 
-import inspect
 import webbrowser
 
 # --- PyQt Compatibility Layer -------------------------------------------------
 try:
-    from PyQt6.QtWidgets import QApplication
     from PyQt6.QtCore import QSize
     from PyQt6.QtGui import QIcon
-    from PyQt6.QtWidgets import (QCheckBox, QFileDialog, QHBoxLayout, QLabel,
-                                 QLineEdit, QMainWindow, QMessageBox,
-                                 QPushButton, QSizePolicy, QSpacerItem,
-                                 QStackedWidget, QTextEdit, QVBoxLayout,
-                                 QWidget)
+    from PyQt6.QtWidgets import (QApplication, QCheckBox, QFileDialog,
+                                 QHBoxLayout, QLabel, QLineEdit, QMainWindow,
+                                 QMessageBox, QPushButton, QSizePolicy,
+                                 QSpacerItem, QStackedWidget, QTextEdit,
+                                 QVBoxLayout, QWidget)
 
     QT_API = 6
 except ImportError:
     try:
-        from PyQt5.QtWidgets import QApplication
         from PyQt5.QtCore import QSize
         from PyQt5.QtGui import QIcon
-        from PyQt5.QtWidgets import (QCheckBox, QFileDialog, QHBoxLayout,
-                                     QLabel, QLineEdit, QMainWindow,
-                                     QMessageBox, QPushButton, QSizePolicy,
-                                     QSpacerItem, QStackedWidget, QTextEdit,
-                                     QVBoxLayout, QWidget)
+        from PyQt5.QtWidgets import (QApplication, QCheckBox, QFileDialog,
+                                     QHBoxLayout, QLabel, QLineEdit,
+                                     QMainWindow, QMessageBox, QPushButton,
+                                     QSizePolicy, QSpacerItem, QStackedWidget,
+                                     QTextEdit, QVBoxLayout, QWidget)
 
         QT_API = 5
     except ImportError:
         try:
-            from PyQt4.QtGui import QApplication
             from PyQt4.QtCore import QSize
-            from PyQt4.QtGui import (QCheckBox, QFileDialog, QHBoxLayout, QIcon,
-                                    QLabel, QLineEdit, QMainWindow, QMessageBox,
-                                    QPushButton, QSizePolicy, QSpacerItem,
-                                    QStackedWidget, QTextEdit, QVBoxLayout,
-                                    QWidget)
+            from PyQt4.QtGui import (QApplication, QCheckBox, QFileDialog,
+                                     QHBoxLayout, QIcon, QLabel, QLineEdit,
+                                     QMainWindow, QMessageBox, QPushButton,
+                                     QSizePolicy, QSpacerItem, QStackedWidget,
+                                     QTextEdit, QVBoxLayout, QWidget)
 
             QT_API = 4
         except ImportError:
             raise ImportError(
-                "No PyQt bindings could be found. Please install PyQt5 or PyQt6:"
+                "No PyQt bindings could be found. Please install PyQt4 or newer:"
+                "\n- For PyQt4: See manual installation instructions"
                 "\n- For PyQt5: pip install AnimeSnap[qt5]"
                 "\n- For PyQt6: pip install AnimeSnap[qt6]"
             )
@@ -52,32 +49,12 @@ QApplication = QApplication
 from qdarkstyle import load_stylesheet  # type: ignore
 
 from AnimeSnap.consts import (AUTHOR, GITHUB, HEIGHT, ICON_SIZE, ICONS_PATH,
-                              PACKAGE, WIDTH, X, Y)
+                              PACKAGE, TWITTER_LINK, WIDTH, X, Y)
 from AnimeSnap.consts import __desc__ as DESC
 from AnimeSnap.consts import __version__ as VERSION
+from AnimeSnap.files import get_image_extensions
 from AnimeSnap.json_operations import json_to_tabular, save_to_json
 from AnimeSnap.search import search_anime
-
-twitter_link = "https://twitter.com/Yisus_Christ_98"
-
-
-def get_image_extensions() -> list[str]:
-    """
-    Get a list of image extensions from the filetype module.
-
-    Returns:
-        list: A list of image extensions.
-    """
-    # Specify the name of the module you want to inspect
-    from filetype.types import image  # type: ignore
-
-    # Get a list of class names defined in the module
-    class_names = [
-        name for name, obj in inspect.getmembers(image) if inspect.isclass(obj)
-    ]
-
-    # Extract the different classes names from the Image class
-    return ["*" + c.lower() for c in class_names]
 
 
 def get_open_file_name(
@@ -85,11 +62,11 @@ def get_open_file_name(
     title: str,
     directory: str,
     file_filter: str,
-    options: QFileDialog.Option | None = None,
-) -> tuple[str, str]:
+    options=None,
+) -> str:
     """Cross-version QFileDialog.getOpenFileName"""
     if QT_API >= 5:
-        file_path = QFileDialog.getOpenFileName(
+        file_path, _ = QFileDialog.getOpenFileName(
             parent=parent,
             caption=title,
             directory=directory,
@@ -164,11 +141,15 @@ class Window(QMainWindow):
         super().__init__()
 
         # Set the window icon
-        self.setWindowIcon(QIcon(f"{ICONS_PATH}/{PACKAGE}.ico"))
+        icon_name = str(ICONS_PATH) + "/" + PACKAGE + ".ico"
+        self.setWindowIcon(QIcon(icon_name))
 
         # Apply the dark theme stylesheet
-        qt_api_name: str = f"pyqt{QT_API}"
-        self.setStyleSheet(load_stylesheet(qt_api=qt_api_name))
+        if QT_API >= 5:
+            qt_api_name = "pyqt" + str(QT_API)
+            self.setStyleSheet(load_stylesheet(qt_api=qt_api_name))
+        else:
+            self.setStyleSheet(load_stylesheet(pyside=False))
 
         self.ctheme = "dark"
         self.search_result = None
@@ -199,13 +180,15 @@ class Window(QMainWindow):
         """
         # Create a QPushButton for the GitHub button
         github_button = QPushButton()
-        github_button.setIcon(QIcon(f"{ICONS_PATH}/github_logo.png"))
+        icon_name = str(ICONS_PATH) + "/github_logo.png"
+        github_button.setIcon(QIcon(icon_name))
         github_button.setIconSize(QSize(ICON_SIZE, ICON_SIZE))
         github_button.clicked.connect(self.open_github)
 
         # Create a QPushButton for the Telegram button
         telegram_button = QPushButton()
-        telegram_button.setIcon(QIcon(f"{ICONS_PATH}/twitter_logo.png"))
+        icon_name = str(ICONS_PATH) + "/twitter_logo.png"
+        telegram_button.setIcon(QIcon(icon_name))
         telegram_button.setIconSize(QSize(ICON_SIZE, ICON_SIZE))
         telegram_button.clicked.connect(self.open_twitter)
 
@@ -238,15 +221,16 @@ class Window(QMainWindow):
     @staticmethod
     def open_twitter() -> None:
         """Open the Twitter profile in the default browser."""
-        webbrowser.open(twitter_link, new=1)
+        webbrowser.open(TWITTER_LINK, new=1)
 
     def show_about(self) -> None:
         """Show the about message."""
-        about_message = (
-            f"{PACKAGE} - {DESC}\n\n"
-            f"Version: {VERSION}\n"
-            f"Author: {AUTHOR}\n"
-            "Website: https://www.animesnapapp.com"
+        about_message = """\
+{PACKAGE} - {DESC}\n
+Version: {VERSION}\n
+Author: {AUTHOR}\n
+Website: https://www.animesnapapp.com""".format(
+            PACKAGE=PACKAGE, DESC=DESC, VERSION=VERSION, AUTHOR=AUTHOR
         )
 
         QMessageBox.about(self, "About", about_message)
@@ -274,7 +258,10 @@ class Window(QMainWindow):
         layout = QVBoxLayout(central_widget)
 
         # Add a vertical spacer with a specified height (e.g., 20 pixels)
-        spacer = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        if QT_API >= 5:
+            spacer = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+        else:
+            spacer = QSpacerItem(20, 20, QSizePolicy.Fixed, QSizePolicy.Fixed)
         layout.addItem(spacer)
 
         theme = self.switch_theme_name()
@@ -282,7 +269,8 @@ class Window(QMainWindow):
         # Create a horizontal layout for the top of the window
         top_layout = QHBoxLayout()
         self.themes_button = QPushButton()
-        self.themes_button.setIcon(QIcon(f"{ICONS_PATH}/{theme}.png"))
+        icon_name = str(ICONS_PATH) + "/" + theme + ".png"
+        self.themes_button.setIcon(QIcon(icon_name))
         self.themes_button.setIconSize(QSize(ICON_SIZE, ICON_SIZE))
         self.themes_button.setFixedSize(ICON_SIZE, ICON_SIZE)
         self.themes_button.clicked.connect(self.on_click_theme_icon)
@@ -299,7 +287,8 @@ class Window(QMainWindow):
         button_layout.addWidget(self.img_source_entry)
 
         self.open_image_button = QPushButton()
-        self.open_image_button.setIcon(QIcon(f"{ICONS_PATH}/folder.png"))
+        icon_name = str(ICONS_PATH) + "/folder.png"
+        self.open_image_button.setIcon(QIcon(icon_name))
         self.open_image_button.setIconSize(QSize(ICON_SIZE, ICON_SIZE))
         self.open_image_button.setFixedSize(ICON_SIZE, ICON_SIZE)
         self.open_image_button.clicked.connect(self.open_image)
@@ -390,11 +379,12 @@ class Window(QMainWindow):
 
     def open_image(self) -> None:
         """Open a file dialog to select an image file."""
-        file_path, _ = get_open_file_name(
+        extensions = " ".join(get_image_extensions())
+        file_path = get_open_file_name(
             self,
             "Open Image to Search",
             "",
-            f"Images ({' '.join(get_image_extensions())})",
+            "Images ({extensions})".format(extensions=extensions),
         )
         if file_path:
             self.img_source_entry.setText(file_path)
@@ -409,7 +399,8 @@ class Window(QMainWindow):
     def on_click_theme_icon(self) -> None:
         """Switch the theme of the application."""
         # We set the icon to the opposite of the current theme
-        self.themes_button.setIcon(QIcon(f"{ICONS_PATH}/{self.ctheme}.png"))
+        icon_name = str(ICONS_PATH) + "/" + self.ctheme + ".png"
+        self.themes_button.setIcon(QIcon(icon_name))
         self.ctheme = self.switch_theme_name()
 
         try:
@@ -417,9 +408,12 @@ class Window(QMainWindow):
         except Exception:
             LightPalette = None
 
-        palette = LightPalette if (self.ctheme == "light" and LightPalette) else None
-        qt_api_name: str = f"pyqt{QT_API}"
-        self.setStyleSheet(load_stylesheet(qt_api=qt_api_name, palette=palette))
+        if QT_API >= 5:
+            palette = LightPalette if (self.ctheme == "light" and LightPalette) else None
+            qt_api_name = "pyqt" + str(QT_API)
+            self.setStyleSheet(load_stylesheet(palette=palette, qt_api=qt_api_name))
+        else:
+            self.setStyleSheet(load_stylesheet(pyside=False))
 
     def switch_theme_name(self) -> str:
         """
@@ -470,7 +464,7 @@ class Window(QMainWindow):
         except Exception as e:
             QMessageBox.critical(self, "Error", str(e))
 
-    def run(self):
+    def run(self) -> None:
         """Run the application."""
         self.show()
         self.raise_()

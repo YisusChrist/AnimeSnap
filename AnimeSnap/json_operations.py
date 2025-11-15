@@ -4,7 +4,7 @@ import json
 from functools import partial
 
 
-def format_entry(entry: dict[str, str | int], include_all_details: bool) -> str:
+def format_entry(entry, include_all_details: bool) -> str:
     """
     Format a single entry in the JSON result.
 
@@ -15,28 +15,28 @@ def format_entry(entry: dict[str, str | int], include_all_details: bool) -> str:
     Returns:
         str: The formatted entry.
     """
-    excluded_keys: set[str] = {"anilist", "video", "image"}
+    excluded_keys = {"anilist", "video", "image"}
 
-    items: dict[str, str | int] = (
+    items = (
         entry.items()
         if include_all_details
         else {k: v for k, v in entry.items() if k not in excluded_keys}
     )
 
-    lines: list[str] = []
+    lines = []
     for key, value in items.items():
         if key == "anilist" and isinstance(entry[key], dict):
-            lines.extend(f"{k.capitalize()}: {v}" for k, v in value.items())
+            lines.extend(k.capitalize() + ":" + v for k, v in value.items())
         elif key == "similarity":
-            lines.append(f"{key.capitalize()}: {value * 100:.2f}%")
+            lines.append(key.capitalize() + ":" + str(value * 100) + "%")
         else:
-            lines.append(f"{key.capitalize()}: {value}")
+            lines.append(key.capitalize() + ":" + str(value))
 
     return "\n".join(lines)
 
 
 def json_to_tabular(
-    data: dict[str, str | int], include_all_details: bool = False
+    data, include_all_details: bool = False
 ) -> str:
     """
     Convert the JSON result to a tabular format.
@@ -56,7 +56,7 @@ def json_to_tabular(
     return "\n\n".join(formatted_data_list)
 
 
-def save_to_json(file_name: str, data: dict[str, str | int]) -> None:
+def save_to_json(file_name: str, data) -> None:
     """
     Save the JSON data to a file.
 
