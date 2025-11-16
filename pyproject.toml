@@ -35,6 +35,9 @@ mypy = "^1.6.0"
 pre-commit = "^3.5.0"
 pylint = "^3.0.1"
 
+[tool.poetry]
+include = [{ path = "icons", format = ["sdist", "wheel"] }]
+
 [tool.pylint]
 disable = [
   "W0622", # Redefining built-in 'format' (redefined-builtin)
