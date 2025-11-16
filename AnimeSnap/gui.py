@@ -6,32 +6,69 @@ import webbrowser
 try:
     from PyQt6.QtCore import QSize
     from PyQt6.QtGui import QIcon
-    from PyQt6.QtWidgets import (QApplication, QCheckBox, QFileDialog,
-                                 QHBoxLayout, QLabel, QLineEdit, QMainWindow,
-                                 QMessageBox, QPushButton, QSizePolicy,
-                                 QSpacerItem, QStackedWidget, QTextEdit,
-                                 QVBoxLayout, QWidget)
+    from PyQt6.QtWidgets import (
+        QApplication,
+        QCheckBox,
+        QFileDialog,
+        QHBoxLayout,
+        QLabel,
+        QLineEdit,
+        QMainWindow,
+        QMessageBox,
+        QPushButton,
+        QSizePolicy,
+        QSpacerItem,
+        QStackedWidget,
+        QTextEdit,
+        QVBoxLayout,
+        QWidget,
+    )
 
     QT_API = 6
 except ImportError:
     try:
         from PyQt5.QtCore import QSize
         from PyQt5.QtGui import QIcon
-        from PyQt5.QtWidgets import (QApplication, QCheckBox, QFileDialog,
-                                     QHBoxLayout, QLabel, QLineEdit,
-                                     QMainWindow, QMessageBox, QPushButton,
-                                     QSizePolicy, QSpacerItem, QStackedWidget,
-                                     QTextEdit, QVBoxLayout, QWidget)
+        from PyQt5.QtWidgets import (
+            QApplication,
+            QCheckBox,
+            QFileDialog,
+            QHBoxLayout,
+            QLabel,
+            QLineEdit,
+            QMainWindow,
+            QMessageBox,
+            QPushButton,
+            QSizePolicy,
+            QSpacerItem,
+            QStackedWidget,
+            QTextEdit,
+            QVBoxLayout,
+            QWidget,
+        )
 
         QT_API = 5
     except ImportError:
         try:
             from PyQt4.QtCore import QSize
-            from PyQt4.QtGui import (QApplication, QCheckBox, QFileDialog,
-                                     QHBoxLayout, QIcon, QLabel, QLineEdit,
-                                     QMainWindow, QMessageBox, QPushButton,
-                                     QSizePolicy, QSpacerItem, QStackedWidget,
-                                     QTextEdit, QVBoxLayout, QWidget)
+            from PyQt4.QtGui import (
+                QApplication,
+                QCheckBox,
+                QFileDialog,
+                QHBoxLayout,
+                QIcon,
+                QLabel,
+                QLineEdit,
+                QMainWindow,
+                QMessageBox,
+                QPushButton,
+                QSizePolicy,
+                QSpacerItem,
+                QStackedWidget,
+                QTextEdit,
+                QVBoxLayout,
+                QWidget,
+            )
 
             QT_API = 4
         except ImportError:
@@ -48,8 +85,18 @@ QApplication = QApplication
 
 from qdarkstyle import load_stylesheet  # type: ignore
 
-from AnimeSnap.consts import (AUTHOR, GITHUB, HEIGHT, ICON_SIZE, ICONS_PATH,
-                              PACKAGE, TWITTER_LINK, WIDTH, X, Y)
+from AnimeSnap.consts import (
+    AUTHOR,
+    GITHUB,
+    HEIGHT,
+    ICON_SIZE,
+    ICONS_PATH,
+    PACKAGE,
+    TWITTER_LINK,
+    WIDTH,
+    X,
+    Y,
+)
 from AnimeSnap.consts import __desc__ as DESC
 from AnimeSnap.consts import __version__ as VERSION
 from AnimeSnap.files import get_image_extensions
@@ -259,7 +306,9 @@ Website: https://www.animesnapapp.com""".format(
 
         # Add a vertical spacer with a specified height (e.g., 20 pixels)
         if QT_API >= 5:
-            spacer = QSpacerItem(20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
+            spacer = QSpacerItem(
+                20, 20, QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed
+            )
         else:
             spacer = QSpacerItem(20, 20, QSizePolicy.Fixed, QSizePolicy.Fixed)
         layout.addItem(spacer)
@@ -409,7 +458,9 @@ Website: https://www.animesnapapp.com""".format(
             LightPalette = None
 
         if QT_API >= 5:
-            palette = LightPalette if (self.ctheme == "light" and LightPalette) else None
+            palette = (
+                LightPalette if (self.ctheme == "light" and LightPalette) else None
+            )
             qt_api_name = "pyqt" + str(QT_API)
             self.setStyleSheet(load_stylesheet(palette=palette, qt_api=qt_api_name))
         else:

@@ -1,7 +1,7 @@
 """Constants for the project."""
 
-from pathlib import Path
 import sys
+from pathlib import Path
 
 if sys.version_info > (3, 5):
     from core_helpers.xdg_paths import PathType, get_user_path

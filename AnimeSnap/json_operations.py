@@ -35,9 +35,7 @@ def format_entry(entry, include_all_details: bool) -> str:
     return "\n".join(lines)
 
 
-def json_to_tabular(
-    data, include_all_details: bool = False
-) -> str:
+def json_to_tabular(data, include_all_details: bool = False) -> str:
     """
     Convert the JSON result to a tabular format.
 
