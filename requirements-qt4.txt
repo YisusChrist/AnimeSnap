@@ -1,0 +1,12 @@
+filetype==1.2.0
+PyQt4==4.11.4
+QDarkStyle==2.6.1
+QtPy<2.0.0
+requests==2.21.0
+  certifi==2021.10.8
+  chardet==3.0.4
+  idna==2.8
+  urllib3==1.24.3
+setuptools==43.0.0
+validators==0.20.0
+  decorator==4.4.2
