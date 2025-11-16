@@ -5,9 +5,11 @@ import sys
 try:
     from rich.traceback import install
 except ImportError:
+
     def install(*args, **kwargs) -> None:
         """Dummy install function if rich is not available."""
         pass
+
 
 from AnimeSnap.cli import get_parsed_args
 from AnimeSnap.gui import QApplication, Window
