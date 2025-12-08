@@ -10,7 +10,6 @@ readme = "README.md"
 requires-python = ">=3.11,<4.0"
 dependencies = [
   "core-helpers>=1.3.1",
-  "filetype>=1.2.0",
   "qdarkstyle>=3.1",
   "requests>=2.31.0",
   "rich>=13.6.0",

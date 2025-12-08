@@ -263,18 +263,6 @@ files = [
 ]
 
 [[package]]
-name = "filetype"
-version = "1.2.0"
-description = "Infer file type and MIME type of any file/buffer. No external dependencies."
-optional = false
-python-versions = "*"
-groups = ["main"]
-files = [
-    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
-    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
-]
-
-[[package]]
 name = "identify"
 version = "2.6.15"
 description = "File identification library for Python"
@@ -1211,4 +1199,4 @@ qt6 = ["pyqt6"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "d2c4a3ed31f1fc5ce4fbc04bdcdc2837bf6e5e6fea9de63b155597f14fc42286"
+content-hash = "d864ea83a2eb6722acab5953d128bce76a48fb5f2c5942e2933386d20a0b5445"

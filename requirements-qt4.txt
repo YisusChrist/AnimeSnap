@@ -1,4 +1,3 @@
-filetype==1.2.0
 PyQt4==4.11.4
 QDarkStyle==2.6.1
 QtPy<2.0.0
