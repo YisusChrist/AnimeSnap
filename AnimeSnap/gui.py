@@ -1,35 +1,74 @@
 """Graphical User Interface for the project."""
 
+import webbrowser
+
 # --- PyQt Compatibility Layer -------------------------------------------------
 try:
     from PyQt6.QtCore import QSize
     from PyQt6.QtGui import QIcon
-    from PyQt6.QtWidgets import (QApplication, QCheckBox, QFileDialog,
-                                 QHBoxLayout, QLabel, QLineEdit, QMainWindow,
-                                 QMessageBox, QPushButton, QSizePolicy,
-                                 QSpacerItem, QStackedWidget, QTextEdit,
-                                 QVBoxLayout, QWidget)
+    from PyQt6.QtWidgets import (
+        QApplication,
+        QCheckBox,
+        QFileDialog,
+        QHBoxLayout,
+        QLabel,
+        QLineEdit,
+        QMainWindow,
+        QMessageBox,
+        QPushButton,
+        QSizePolicy,
+        QSpacerItem,
+        QStackedWidget,
+        QTextEdit,
+        QVBoxLayout,
+        QWidget,
+    )
 
     QT_API = 6
 except ImportError:
     try:
         from PyQt5.QtCore import QSize
         from PyQt5.QtGui import QIcon
-        from PyQt5.QtWidgets import (QApplication, QCheckBox, QFileDialog,
-                                     QHBoxLayout, QLabel, QLineEdit,
-                                     QMainWindow, QMessageBox, QPushButton,
-                                     QSizePolicy, QSpacerItem, QStackedWidget,
-                                     QTextEdit, QVBoxLayout, QWidget)
+        from PyQt5.QtWidgets import (
+            QApplication,
+            QCheckBox,
+            QFileDialog,
+            QHBoxLayout,
+            QLabel,
+            QLineEdit,
+            QMainWindow,
+            QMessageBox,
+            QPushButton,
+            QSizePolicy,
+            QSpacerItem,
+            QStackedWidget,
+            QTextEdit,
+            QVBoxLayout,
+            QWidget,
+        )
 
         QT_API = 5
     except ImportError:
         try:
             from PyQt4.QtCore import QSize
-            from PyQt4.QtGui import (QApplication, QCheckBox, QFileDialog,
-                                     QHBoxLayout, QIcon, QLabel, QLineEdit,
-                                     QMainWindow, QMessageBox, QPushButton,
-                                     QSizePolicy, QSpacerItem, QStackedWidget,
-                                     QTextEdit, QVBoxLayout, QWidget)
+            from PyQt4.QtGui import (
+                QApplication,
+                QCheckBox,
+                QFileDialog,
+                QHBoxLayout,
+                QIcon,
+                QLabel,
+                QLineEdit,
+                QMainWindow,
+                QMessageBox,
+                QPushButton,
+                QSizePolicy,
+                QSpacerItem,
+                QStackedWidget,
+                QTextEdit,
+                QVBoxLayout,
+                QWidget,
+            )
 
             QT_API = 4
         except ImportError:
@@ -43,15 +82,24 @@ except ImportError:
 
 QApplication = QApplication
 
-import mimetypes
-import webbrowser
 
 from qdarkstyle import load_stylesheet  # type: ignore
 
-from AnimeSnap.consts import (AUTHOR, GITHUB, HEIGHT, ICON_SIZE, ICONS_PATH,
-                              PACKAGE, TWITTER_LINK, WIDTH, X, Y)
+from AnimeSnap.consts import (
+    AUTHOR,
+    GITHUB,
+    HEIGHT,
+    ICON_SIZE,
+    ICONS_PATH,
+    PACKAGE,
+    TWITTER_LINK,
+    WIDTH,
+    X,
+    Y,
+)
 from AnimeSnap.consts import __desc__ as DESC
 from AnimeSnap.consts import __version__ as VERSION
+from AnimeSnap.files import get_image_extensions
 from AnimeSnap.json_operations import json_to_tabular, save_to_json
 from AnimeSnap.search import search_anime
 
@@ -94,17 +142,6 @@ def get_save_file_name(
         return file_path, _
     else:  # PyQt4
         return QFileDialog.getSaveFileName(parent, title, directory, file_filter)
-
-
-def get_image_extensions() -> list:
-    """
-    Returns a list of common image file extensions.
-    """
-    image_extensions = []
-    for ext, mime in mimetypes.types_map.items():
-        if mime.startswith('image/'):
-            image_extensions.append("*" + ext)
-    return sorted(image_extensions)
 
 
 class Window(QMainWindow):
