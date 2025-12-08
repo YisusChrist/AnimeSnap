@@ -4,69 +4,32 @@
 try:
     from PyQt6.QtCore import QSize
     from PyQt6.QtGui import QIcon
-    from PyQt6.QtWidgets import (
-        QApplication,
-        QCheckBox,
-        QFileDialog,
-        QHBoxLayout,
-        QLabel,
-        QLineEdit,
-        QMainWindow,
-        QMessageBox,
-        QPushButton,
-        QSizePolicy,
-        QSpacerItem,
-        QStackedWidget,
-        QTextEdit,
-        QVBoxLayout,
-        QWidget,
-    )
+    from PyQt6.QtWidgets import (QApplication, QCheckBox, QFileDialog,
+                                 QHBoxLayout, QLabel, QLineEdit, QMainWindow,
+                                 QMessageBox, QPushButton, QSizePolicy,
+                                 QSpacerItem, QStackedWidget, QTextEdit,
+                                 QVBoxLayout, QWidget)
 
     QT_API = 6
 except ImportError:
     try:
         from PyQt5.QtCore import QSize
         from PyQt5.QtGui import QIcon
-        from PyQt5.QtWidgets import (
-            QApplication,
-            QCheckBox,
-            QFileDialog,
-            QHBoxLayout,
-            QLabel,
-            QLineEdit,
-            QMainWindow,
-            QMessageBox,
-            QPushButton,
-            QSizePolicy,
-            QSpacerItem,
-            QStackedWidget,
-            QTextEdit,
-            QVBoxLayout,
-            QWidget,
-        )
+        from PyQt5.QtWidgets import (QApplication, QCheckBox, QFileDialog,
+                                     QHBoxLayout, QLabel, QLineEdit,
+                                     QMainWindow, QMessageBox, QPushButton,
+                                     QSizePolicy, QSpacerItem, QStackedWidget,
+                                     QTextEdit, QVBoxLayout, QWidget)
 
         QT_API = 5
     except ImportError:
         try:
             from PyQt4.QtCore import QSize
-            from PyQt4.QtGui import (
-                QApplication,
-                QCheckBox,
-                QFileDialog,
-                QHBoxLayout,
-                QIcon,
-                QLabel,
-                QLineEdit,
-                QMainWindow,
-                QMessageBox,
-                QPushButton,
-                QSizePolicy,
-                QSpacerItem,
-                QStackedWidget,
-                QTextEdit,
-                QVBoxLayout,
-                QWidget,
-            )
+            from PyQt4.QtGui import (QApplication, QCheckBox, QFileDialog,
+                                     QHBoxLayout, QIcon, QLabel, QLineEdit,
+                                     QMainWindow, QMessageBox, QPushButton,
+                                     QSizePolicy, QSpacerItem, QStackedWidget,
+                                     QTextEdit, QVBoxLayout, QWidget)
 
             QT_API = 4
         except ImportError:
@@ -85,18 +48,8 @@ import webbrowser
 
 from qdarkstyle import load_stylesheet  # type: ignore
 
-from AnimeSnap.consts import (
-    AUTHOR,
-    GITHUB,
-    HEIGHT,
-    ICON_SIZE,
-    ICONS_PATH,
-    PACKAGE,
-    TWITTER_LINK,
-    WIDTH,
-    X,
-    Y,
-)
+from AnimeSnap.consts import (AUTHOR, GITHUB, HEIGHT, ICON_SIZE, ICONS_PATH,
+                              PACKAGE, TWITTER_LINK, WIDTH, X, Y)
 from AnimeSnap.consts import __desc__ as DESC
 from AnimeSnap.consts import __version__ as VERSION
 from AnimeSnap.json_operations import json_to_tabular, save_to_json
@@ -149,7 +102,7 @@ def get_image_extensions() -> list:
     """
     image_extensions = []
     for ext, mime in mimetypes.types_map.items():
-        if mime.startswith("image/"):
+        if mime.startswith('image/'):
             image_extensions.append("*" + ext)
     return sorted(image_extensions)
 
