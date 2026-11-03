@@ -1029,14 +1029,14 @@ files = [
 
 [[package]]
 name = "python-discovery"
-version = "1.7.0"
+version = "1.9.2"
 description = "Python interpreter discovery"
 optional = false
 python-versions = ">=3.9"
 groups = ["dev"]
 files = [
-    {file = "python_discovery-1.7.0-py3-none-any.whl", hash = "sha256:252643f846e11e959ee6fb2f6adafad6822f860b7c1cf953360ea9a020c6de71"},
-    {file = "python_discovery-1.7.0.tar.gz", hash = "sha256:f484668953706f0b8815521ccf13811fa6ccdc4bd68cf3ef943594ad68a2ac86"},
+    {file = "python_discovery-1.9.2-py3-none-any.whl", hash = "sha256:65857e689ba72aeb5517e68b7025430ed60372b78d037245e0bed3d41ae7ba65"},
+    {file = "python_discovery-1.9.2.tar.gz", hash = "sha256:de397b9c4b09a5fb8bb4c51db3c0da71fb81d2283718d74fd1efaabffc32afbc"},
 ]
 
 [package.dependencies]
