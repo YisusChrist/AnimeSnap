@@ -454,6 +454,7 @@ description = "Mypyc runtime library"
 optional = false
 python-versions = ">=3.10"
 groups = ["dev"]
+markers = "platform_python_implementation != \"PyPy\""
 files = [
     {file = "librt-0.17.0-cp310-cp310-macosx_10_9_x86_64.whl", hash = "sha256:d8d3bb5cb72f455007cf893151fdaf4b08aa1110af388ed9e0388510f7cbacff"},
     {file = "librt-0.17.0-cp310-cp310-macosx_11_0_arm64.whl", hash = "sha256:22e27fb876b6b684373555a0589cad5e2cf0a6e19a301f17d3f6d604d7d65dee"},
