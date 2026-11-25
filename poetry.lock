@@ -311,14 +311,14 @@ files = [
 
 [[package]]
 name = "filelock"
-version = "4.2.12"
+version = "4.3.1"
 description = "A platform independent file lock."
 optional = false
 python-versions = ">=3.11"
 groups = ["dev"]
 files = [
-    {file = "filelock-4.2.12-py3-none-any.whl", hash = "sha256:21decfec02f116ed4c954433cdb31f28c3b346b784543177b6d7059da2702ee9"},
-    {file = "filelock-4.2.12.tar.gz", hash = "sha256:7e7da24d3ac39268b0f156e56870001de44886318f092f9d851e692f7114d6dd"},
+    {file = "filelock-4.3.1-py3-none-any.whl", hash = "sha256:79e43df8e9fe509cd83a3899a7c186c8077cbbe4d200a1ed3705c2f3bb6bc487"},
+    {file = "filelock-4.3.1.tar.gz", hash = "sha256:4c5ee627c401f1863ac6a0de9a14a28d3bb5f8c730b45e2fd6e5dbc79cf34b9e"},
 ]
 
 [[package]]
