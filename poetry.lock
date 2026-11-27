@@ -961,19 +961,19 @@ PyQt6-sip = ">=13.13,<14"
 
 [[package]]
 name = "pyqt6-qt6"
-version = "6.12.0"
+version = "6.12.1"
 description = "The subset of a Qt installation needed by PyQt6."
 optional = true
 python-versions = "*"
 groups = ["main"]
 markers = "extra == \"qt6\""
 files = [
-    {file = "pyqt6_qt6-6.12.0-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:8553fe11b042e6818a2cb9de1a0eda0c0e41d1b221f4719fd9645b5757797d6e"},
-    {file = "pyqt6_qt6-6.12.0-py3-none-macosx_11_0_arm64.whl", hash = "sha256:4803a175183d97df3655dd4d7f032661a39d22943c3511effadf31018872fe73"},
-    {file = "pyqt6_qt6-6.12.0-py3-none-manylinux_2_34_x86_64.whl", hash = "sha256:b76e9962e83cf7daff9bb7ab169c804f37b77ab2d7393d3b380351f5a2441ee0"},
-    {file = "pyqt6_qt6-6.12.0-py3-none-manylinux_2_39_aarch64.whl", hash = "sha256:2460119ac5f725cfddc331bd56eca22fbb61b29a549d417b7bcc304c7fc9459b"},
-    {file = "pyqt6_qt6-6.12.0-py3-none-win_amd64.whl", hash = "sha256:a0f3e52fcd014b3d40f4aa856f8cb6843cf13720a2c2f31267f03702bc54d07b"},
-    {file = "pyqt6_qt6-6.12.0-py3-none-win_arm64.whl", hash = "sha256:6f4334c7a29e2ff64f665212af1aa91b1d03d23802a7667ebc55e3d857eb9bc1"},
+    {file = "pyqt6_qt6-6.12.1-py3-none-macosx_10_14_x86_64.whl", hash = "sha256:2281045392c42924108d954b66f7dbd2b4f4c87f16c2dac5ee54c7be285d1a99"},
+    {file = "pyqt6_qt6-6.12.1-py3-none-macosx_11_0_arm64.whl", hash = "sha256:79ffa2afd4d196bd24ea91c798927b047f15a2cda24fdcab5b1b96df2c84d1ef"},
+    {file = "pyqt6_qt6-6.12.1-py3-none-manylinux_2_34_x86_64.whl", hash = "sha256:33208952342131e0477a461e31c654b679fa71b2b32af96422587ed0ea3e47ca"},
+    {file = "pyqt6_qt6-6.12.1-py3-none-manylinux_2_39_aarch64.whl", hash = "sha256:d33dbe32aa5bd9d49dba3ca65b1b96875bf9888447ec3b291253725cad5b7cb2"},
+    {file = "pyqt6_qt6-6.12.1-py3-none-win_amd64.whl", hash = "sha256:1ab5f90b863cbc074f8f097a9ddf8bfff7efa6a3048e4bb59bb94fc904a5ac91"},
+    {file = "pyqt6_qt6-6.12.1-py3-none-win_arm64.whl", hash = "sha256:2a5fcffb71a07cb434485004fd7ad83e76766de08142cc30802f9fd386f00ecb"},
 ]
 
 [[package]]
